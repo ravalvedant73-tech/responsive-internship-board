@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Responsive Internship Board</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#results">Skip to results</a>
+
+  <header>
+    <h1>Responsive Internship Board</h1>
+    <p>Find internships by keyword or domain.</p>
+  </header>
+
+  <main>
+    <form class="filters" role="search" onsubmit="return false">
+      <div class="field">
+        <label for="search">Search internships</label>
+        <input id="search" type="search" placeholder="e.g. Frontend, Research" />
+      </div>
+      <div class="field">
+        <label for="domain">Domain</label>
+        <select id="domain">
+          <option value="all">All domains</option>
+        </select>
+      </div>
+    </form>
+
+    <p id="status" aria-live="polite"></p>
+    <section id="results" class="grid" aria-label="Internship listings"></section>
+    <div id="message" class="message" role="alert" hidden></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html> 
