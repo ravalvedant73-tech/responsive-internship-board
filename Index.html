@@ -1,38 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Responsive Internship Board</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Accessible, responsive internship listing with search, filters and an application form. Plain HTML, CSS and JavaScript.">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#results">Skip to results</a>
+  <a class="skip-link" href="#results">Skip to internship results</a>
 
-  <header>
-    <h1>Responsive Internship Board</h1>
-    <p>Find internships by keyword or domain.</p>
+  <header class="site-header">
+    <div class="container">
+      <h1>Internship Board</h1>
+      <p class="tagline">Find a fictional student internship, filter by domain and work mode, and apply.</p>
+    </div>
   </header>
 
-  <main>
-    <form class="filters" role="search" onsubmit="return false">
-      <div class="field">
-        <label for="search">Search internships</label>
-        <input id="search" type="search" placeholder="e.g. Frontend, Research" />
+  <main class="container">
+    <form id="filters" class="filters" role="search" aria-label="Search and filter internships" novalidate>
+      <div class="field field--search">
+        <label for="search">Search by title, skill or location</label>
+        <input id="search" name="search" type="search" placeholder="e.g. JavaScript, Pune" autocomplete="off">
       </div>
       <div class="field">
         <label for="domain">Domain</label>
-        <select id="domain">
-          <option value="all">All domains</option>
-        </select>
+        <select id="domain" name="domain"><option value="">All domains</option></select>
+      </div>
+      <div class="field">
+        <label for="mode">Work mode</label>
+        <select id="mode" name="mode"><option value="">All modes</option></select>
+      </div>
+      <div class="field field--actions">
+        <button type="reset" id="clear-filters" class="btn btn--ghost">Clear filters</button>
+      </div>
+      <div class="field field--demo">
+        <label class="check">
+          <input type="checkbox" id="simulate-error">
+          <span>Simulate a network error (demo)</span>
+        </label>
       </div>
     </form>
 
-    <p id="status" aria-live="polite"></p>
-    <section id="results" class="grid" aria-label="Internship listings"></section>
-    <div id="message" class="message" role="alert" hidden></div>
+    <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
+
+    <section id="results" aria-label="Internship results" tabindex="-1">
+      <ul id="card-list" class="card-grid" hidden></ul>
+
+      <div id="loading" class="state" hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Loading internships…</p>
+      </div>
+
+      <div id="empty" class="state" hidden>
+        <h2>No internships match your search</h2>
+        <p>Try a different keyword or clear the filters.</p>
+        <button type="button" id="empty-clear" class="btn">Clear filters</button>
+      </div>
+
+      <div id="error" class="state state--error" role="alert" hidden>
+        <h2>Something went wrong</h2>
+        <p id="error-message">We could not load the internships.</p>
+        <button type="button" id="retry" class="btn">Retry</button>
+      </div>
+    </section>
   </main>
 
-  <script src="script.js"></script>
+  <dialog id="detail-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-inner">
+      <div class="dialog-head">
+        <h2 id="dialog-title"></h2>
+        <button type="button" class="btn btn--ghost" id="dialog-close" aria-label="Close dialog">Close</button>
+      </div>
+      <dl id="dialog-details" class="details"></dl>
+
+      <form id="apply-form" novalidate>
+        <h3>Apply for this internship</h3>
+        <div class="field">
+          <label for="applicant-name">Full name <span aria-hidden="true">*</span></label>
+          <input id="applicant-name" name="name" type="text" autocomplete="name" required aria-describedby="name-error">
+          <p class="field-error" id="name-error" hidden></p>
+        </div>
+        <div class="field">
+          <label for="applicant-email">Email <span aria-hidden="true">*</span></label>
+          <input id="applicant-email" name="email" type="email" autocomplete="email" required aria-describedby="email-error">
+          <p class="field-error" id="email-error" hidden></p>
+        </div>
+        <div class="field">
+          <label for="applicant-portfolio">Portfolio link (optional)</label>
+          <input id="applicant-portfolio" name="portfolio" type="url" placeholder="https://" aria-describedby="portfolio-error">
+          <p class="field-error" id="portfolio-error" hidden></p>
+        </div>
+        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+        <div class="form-actions">
+          <button type="submit" class="btn">Submit application</button>
+          <button type="button" class="btn btn--ghost" id="cancel-apply">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <footer class="site-footer container">
+    <p>All records are fictional. Press <kbd>/</kbd> to jump to search, <kbd>Esc</kbd> to close a dialog.</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
 </body>
-</html> 
+</html>
