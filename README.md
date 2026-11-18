@@ -1,2 +1,2 @@
 # internship-board
-Internsgip of fukll stack developer
+Internship of fukll stack developer
