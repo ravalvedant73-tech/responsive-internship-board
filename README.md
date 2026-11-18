@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Responsive Internship Board
 
 An accessible, responsive internship listing built with **plain HTML, CSS and JavaScript** (no framework, no build step).
@@ -76,3 +77,7 @@ Screenshots: `docs/screenshot-360px.png`, `docs/screenshot-desktop.png`. Details
 ## Notes
 
 All internship records are fictional. Applications are stored only in the browser's `localStorage` for the duplicate check demo.
+=======
+# internship-board
+Internship of full stack developer
+>>>>>>> 4e6be62b91dbbe4fa92ff71da94adc06d0f8d70e
