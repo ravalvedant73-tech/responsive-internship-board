@@ -1,2 +1,2 @@
 # internship-board
-Internship of fukll stack developer
+Internship of full stack developer
